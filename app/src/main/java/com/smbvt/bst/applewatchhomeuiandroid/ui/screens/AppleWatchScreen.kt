@@ -1,5 +1,9 @@
 package com.smbvt.bst.applewatchhomeuiandroid.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,6 +45,9 @@ fun AppleWatchScreen(
     }
 
     val list = countries.companiesList ?: listOf()
+    var isLoadingCompleted by remember {
+        mutableStateOf(false)
+    }
 
     Box(
         modifier = Modifier
@@ -47,8 +55,7 @@ fun AppleWatchScreen(
             .background(color = GrayFF181B1F)
     ) {
         androidx.compose.animation.AnimatedVisibility(visible = list.isNotEmpty()) {
-            AppleWatchGridLayout(
-                modifier = Modifier.fillMaxSize(),
+            AppleWatchGridLayout(modifier = Modifier.fillMaxSize(),
                 rowItemsCount = Utils.calculateNumberOfColumns(list.size),
                 itemSize = ItemSize80,
                 content = {
@@ -64,8 +71,21 @@ fun AppleWatchScreen(
                 },
                 appleWatchGridLayoutInitialState = AppleWatchGridLayoutInitialState(
                     firstVisibleItemIndex, false
-                )
-            )
+                ),
+                onLoadingCompleted = {
+                    isLoadingCompleted = true
+                })
+        }
+        AnimatedVisibility(visible = !isLoadingCompleted,
+            enter = fadeIn(animationSpec = tween(500)),
+            exit = fadeOut(animationSpec = tween(500))) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = GrayFF131518)
+            ) {
+
+            }
         }
         Canvas(modifier = Modifier.fillMaxSize()) {
             val circleRadius = size.minDimension / 2

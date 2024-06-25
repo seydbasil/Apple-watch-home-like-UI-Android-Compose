@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.smbvt.bst.applewatchhomeuiandroid.domain.Country
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AppleWatchHomeUIAndroidTheme
 import com.smbvt.bst.applewatchhomeuiandroid.utils.convertDpToPx
+import kotlinx.coroutines.delay
 
 /**
  * @param index is the index of list into which we need to navigate for the first time
@@ -33,6 +34,13 @@ data class AppleWatchGridLayoutInitialState(val index: Int? = null, val animate:
 
 }
 
+/**
+ * @param onLoadingCompleted will be called once the GridLayout loading is completed.-
+ * It is recommended to use this method and update loading UI once loading is completed if we use [AppleWatchGridLayoutInitialState] with animate = false. Because if no animation, the items will take sometime to draw
+ * It is not recommended to use this method for loading UI if we use [AppleWatchGridLayoutInitialState] with animate = true. Because we will have a animation which can't be seen if we use a loading UI.
+ * @param appleWatchGridLayoutInitialState can be used to move to the specific item at initial time
+ * @param content is the set of items to be drawn in the layout
+ */
 @Composable
 fun AppleWatchGridLayout(
     modifier: Modifier = Modifier,
@@ -41,7 +49,8 @@ fun AppleWatchGridLayout(
     state: WatchGridState = rememberWatchGridState(),
     content: @Composable () -> Unit,
     updateItemIndex: (index: Int) -> Unit = {},
-    appleWatchGridLayoutInitialState: AppleWatchGridLayoutInitialState? = null
+    appleWatchGridLayoutInitialState: AppleWatchGridLayoutInitialState? = null,
+    onLoadingCompleted : () -> Unit = {}
 ) {
 
     var previousScale: Float = -1.0f
@@ -117,11 +126,13 @@ fun AppleWatchGridLayout(
                     velocity = Offset(0f, 0f),
                 )
             } else {
+                // when use snapTo, need some delay to move to the item
+                delay(200)
                 state.snapTo(
                     offset = Offset(getX, getY),
                 )
             }
-
+            onLoadingCompleted()
         }
     })
 }
