@@ -1,5 +1,7 @@
 package com.smbvt.bst.applewatchhomeuiandroid.ui.navigation
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
@@ -27,9 +29,9 @@ fun MainNavHost() {
             })
         }
         composable(appleWatchScreen) {
-            AppleWatchScreen(countries = DataUtils.getMenuItems(context))/*  StoryScreen(onClickClose = {
-                  navController.navigateUp()
-              })*/
+            AppleWatchScreen(countries = DataUtils.getMenuItems(context), onClickItem = {
+                Toast.makeText(context, "Clicked on item : $it", Toast.LENGTH_SHORT).show()
+            })
         }
         composable(countryScreen) {
             CountryScreen(countries = DataUtils.getCountries())/*  StoryScreen(onClickClose = {

@@ -2,6 +2,7 @@ package com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,16 +21,17 @@ import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.ItemSize80
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding5
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding7
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MenuItem(
-    modifier: Modifier = Modifier, data: Menu, isCenter: Boolean = false, onClick: () -> Unit = {}
+    modifier: Modifier = Modifier, data: Menu, onClick: () -> Unit = {}
 ) {
     val shape = CircleShape
     Image(
         modifier = modifier
             .padding(Padding5)
-            .clip(shape),
+            .clip(shape).clickable {
+                onClick()
+            },
         painter = painterResource(id = data.icon),
         contentDescription = null
     )
@@ -61,7 +63,7 @@ fun PreviewMenuItemRoundedCenter() {
         contentAlignment = Alignment.Center
     ) {
         MenuItem(
-            data = Menu(), modifier = Modifier.size(ItemSize80), isCenter = true
+            data = Menu(), modifier = Modifier.size(ItemSize80)
         )
     }
 }

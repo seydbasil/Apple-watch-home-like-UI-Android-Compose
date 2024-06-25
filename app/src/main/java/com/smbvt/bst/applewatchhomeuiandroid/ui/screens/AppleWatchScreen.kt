@@ -22,7 +22,6 @@ import com.smbvt.bst.applewatchhomeuiandroid.domain.MenuItems
 import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.AppleWatchGridLayout
 import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.AppleWatchGridLayoutInitialState
 import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.MenuItem
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayDark
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF131518
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF181B1F
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF505050
@@ -31,7 +30,9 @@ import com.smbvt.bst.applewatchhomeuiandroid.utils.Utils
 
 @Composable
 fun AppleWatchScreen(
-    countries: MenuItems = MenuItems(listOf()), firstVisibleItemIndex: Int = 25
+    countries: MenuItems = MenuItems(listOf()),
+    firstVisibleItemIndex: Int = 25,
+    onClickItem: (index: Int) -> Unit = {}
 ) {
 
     var centerItem by remember {
@@ -52,10 +53,10 @@ fun AppleWatchScreen(
                 itemSize = ItemSize80,
                 content = {
                     list.forEachIndexed { index, pair ->
-                        MenuItem(data = pair, isCenter = centerItem == index) {
+                        MenuItem(data = pair, onClick = {
                             centerItem = index
-
-                        }
+                            onClickItem(index)
+                        })
                     }
                 },
                 updateItemIndex = {
