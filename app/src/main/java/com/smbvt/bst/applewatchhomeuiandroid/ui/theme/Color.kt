@@ -1,6 +1,5 @@
 package com.smbvt.bst.applewatchhomeuiandroid.ui.theme
 
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -30,4 +29,8 @@ val Steel1 = Color(0xFF5A5967)
 val Steel2 = Color(0xFFF6FBFE)
 val Steel3 = Color(0xFF777684)
 val Steel4 = Color(0xFFCCCCD4)
+val GrayFF181B1F = Color(0xFF181B1F)
+val GrayFF131518 = Color(0xFF131518)
+val GrayFF505050 = Color(0xFF0F0F0F)
+
 

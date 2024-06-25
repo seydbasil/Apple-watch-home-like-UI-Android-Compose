@@ -21,9 +21,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.smbvt.bst.applewatchhomeuiandroid.domain.CompanyDetails
+import com.smbvt.bst.applewatchhomeuiandroid.domain.Country
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AppleWatchHomeUIAndroidTheme
 import com.smbvt.bst.applewatchhomeuiandroid.utils.convertDpToPx
+
+/**
+ * @param index is the index of list into which we need to navigate for the first time
+ * @param animate can be used to enable and disable animation at initial time.
+ */
+data class AppleWatchGridLayoutInitialState(val index: Int? = null, val animate: Boolean = true) {
+
+}
 
 @Composable
 fun AppleWatchGridLayout(
@@ -33,7 +41,7 @@ fun AppleWatchGridLayout(
     state: WatchGridState = rememberWatchGridState(),
     content: @Composable () -> Unit,
     updateItemIndex: (index: Int) -> Unit = {},
-    firstVisibleItemIndex: Int? = null
+    appleWatchGridLayoutInitialState: AppleWatchGridLayoutInitialState? = null
 ) {
 
     var previousScale: Float = -1.0f
@@ -77,9 +85,9 @@ fun AppleWatchGridLayout(
                     updateItemIndex(index)
                 }
 
-                if (firstVisibleItemIndex != null) {
+                if (appleWatchGridLayoutInitialState != null) {
                     if (getDesiredItemPosition == null) {
-                        if (index == firstVisibleItemIndex) {
+                        if (index == appleWatchGridLayoutInitialState.index) {
                             getDesiredItemPosition = position
                         }
                     }
@@ -103,10 +111,17 @@ fun AppleWatchGridLayout(
             val halfScreenWidthY = size.height / 2
             val getX = (0 - it.x) + halfScreenWidthX - itemSizeHalfInPx
             val getY = (0 - it.y) + halfScreenWidthY - itemSizeHalfInPx
-            state.animateTo(
-                offset = Offset(getX, getY),
-                velocity = Offset(0f, 0f),
-            )
+            if (appleWatchGridLayoutInitialState?.animate == true) {
+                state.animateTo(
+                    offset = Offset(getX, getY),
+                    velocity = Offset(0f, 0f),
+                )
+            } else {
+                state.snapTo(
+                    offset = Offset(getX, getY),
+                )
+            }
+
         }
     })
 }
@@ -121,9 +136,9 @@ fun WatchGridLayoutPreview() {
             rowItemsCount = 5,
             itemSize = 80.dp,
             content = {
-                listOf<CompanyDetails>().forEach { (res, name) ->
-                    AppleWatchItem(
-                        data = CompanyDetails()
+                listOf<Country>().forEach { (res, name) ->
+                    CountryItem(
+                        data = Country()
                     )
                 }
             })

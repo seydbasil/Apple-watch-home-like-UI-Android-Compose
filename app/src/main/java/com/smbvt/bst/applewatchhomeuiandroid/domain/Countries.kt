@@ -4,11 +4,11 @@ import androidx.annotation.Keep
 
 
 @Keep
-data class InvestmentOptionCompanies(
-    val companiesList: List<CompanyDetails>? = null
+data class Countries(
+    val companiesList: List<Country>? = null
 )
 
-data class CompanyDetails(
+data class Country(
     val id: Int = 0,
     val name: String = "",
     val icon: Any? = "",

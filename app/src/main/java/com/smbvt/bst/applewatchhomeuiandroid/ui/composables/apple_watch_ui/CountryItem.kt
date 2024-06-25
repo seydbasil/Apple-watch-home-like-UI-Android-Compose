@@ -35,7 +35,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.smbvt.bst.applewatchhomeuiandroid.R
-import com.smbvt.bst.applewatchhomeuiandroid.domain.CompanyDetails
+import com.smbvt.bst.applewatchhomeuiandroid.domain.Country
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Black212121
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.BlackAlpha40
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Blue5F3EDB
@@ -49,9 +49,9 @@ import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Width1
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun AppleWatchItem(
+fun CountryItem(
     modifier: Modifier = Modifier,
-    data: CompanyDetails,
+    data: Country,
     isCenter: Boolean = false,
     onClick: () -> Unit = {}
 ) {
@@ -165,8 +165,8 @@ fun PreviewIconRounded() {
             .background(color = Color.White),
         contentAlignment = Alignment.Center
     ) {
-        AppleWatchItem(
-            data = CompanyDetails(), modifier = Modifier.size(100.dp)
+        CountryItem(
+            data = Country(), modifier = Modifier.size(100.dp)
         )
     }
 }
@@ -180,8 +180,8 @@ fun PreviewIconRoundedCenter() {
             .background(color = Color.White),
         contentAlignment = Alignment.Center
     ) {
-        AppleWatchItem(
-            data = CompanyDetails(), modifier = Modifier.size(100.dp), isCenter = true
+        CountryItem(
+            data = Country(), modifier = Modifier.size(100.dp), isCenter = true
         )
     }
 }
