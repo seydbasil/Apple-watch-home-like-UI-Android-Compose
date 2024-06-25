@@ -15,14 +15,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.smbvt.bst.applewatchhomeuiandroid.domain.InvestmentOptionCompanies
-import com.smbvt.bst.applewatchhomeuiandroid.ui.components.apple_watch_ui.AppleWatchGridLayout
-import com.smbvt.bst.applewatchhomeuiandroid.ui.components.apple_watch_ui.AppleWatchItem
+import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.AppleWatchGridLayout
+import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.AppleWatchItem
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.ItemSize100
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.White
 import com.smbvt.bst.applewatchhomeuiandroid.utils.Utils
 
 @Composable
-fun IndividualCompanyDetailsScreen(
+fun AppleWatchScreen(
     investmentOptionCompanies: InvestmentOptionCompanies = InvestmentOptionCompanies(listOf()),
     firstVisibleItemIndex: Int = 25
 ) {
@@ -94,7 +94,7 @@ fun IndividualCompanyDetailsScreen(
 @Preview
 fun PreviewIndividualCompanyDetailsScreen() {
     Box(modifier = Modifier.background(color = Color.White)) {
-        IndividualCompanyDetailsScreen(
+        AppleWatchScreen(
             InvestmentOptionCompanies(listOf())
         )
     }

@@ -1,4 +1,4 @@
-package com.smbvt.bst.applewatchhomeuiandroid.ui.components.apple_watch_ui
+package com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector2D

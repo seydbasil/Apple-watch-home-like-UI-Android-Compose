@@ -1,4 +1,4 @@
-package com.smbvt.bst.applewatchhomeuiandroid.ui.components.apple_watch_ui
+package com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui
 
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background

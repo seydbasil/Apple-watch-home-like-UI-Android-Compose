@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppleWatchHomeUIAndroid</string>
     <string name="no_name">No name</string>
+    <string name="view_apple_watch_ui">Apple watch UI</string>
 </resources>

@@ -10,7 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.smbvt.bst.applewatchhomeuiandroid.ui.screens.IndividualCompanyDetailsScreen
+import com.smbvt.bst.applewatchhomeuiandroid.ui.navigation.MainNavHost
+import com.smbvt.bst.applewatchhomeuiandroid.ui.screens.AppleWatchScreen
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AppleWatchHomeUIAndroidTheme
 import com.smbvt.bst.applewatchhomeuiandroid.utils.DataUtils.getDummyData
 
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    IndividualCompanyDetailsScreen(investmentOptionCompanies = getDummyData())
+                    MainNavHost()
                 }
             }
         }
