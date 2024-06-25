@@ -25,7 +25,7 @@ import com.smbvt.bst.applewatchhomeuiandroid.utils.Utils
 @Composable
 fun CountryScreen(
     countries: Countries = Countries(listOf()),
-    firstVisibleItemIndex: Int = 25
+    firstVisibleItemIndex: Int = 78
 ) {
 
     var centerItem by remember {

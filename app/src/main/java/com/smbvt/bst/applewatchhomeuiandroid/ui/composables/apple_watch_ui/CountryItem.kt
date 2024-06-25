@@ -106,9 +106,7 @@ fun CountryItem(
             Text(
                 modifier = Modifier.wrapContentSize(),
                 textAlign = TextAlign.Center,
-                text = if (data.name.isNotEmpty()) data.name.substring(
-                    0, 1
-                ) else stringResource(id = R.string.no_name),
+                text =  data.name.firstOrNull()?.toString() ?: stringResource(id = R.string.no_name),
                 style = TextStyle(
                     color = Purple4D29D7, fontSize = FontSize32
                 ),
@@ -128,6 +126,8 @@ fun CountryItem(
                     .background(color = background)
                     .clickable(onClick = onClick),
             ) {
+                // identify once loading is completed and set white background color for the image view to hide name first letter text
+                // while loading or once loading is failed, we are showing name first letter which usually happens when we load image from web url
                 it.listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
@@ -166,7 +166,7 @@ fun PreviewIconRounded() {
         contentAlignment = Alignment.Center
     ) {
         CountryItem(
-            data = Country(), modifier = Modifier.size(100.dp)
+            data = Country(name = "A"), modifier = Modifier.size(100.dp)
         )
     }
 }
