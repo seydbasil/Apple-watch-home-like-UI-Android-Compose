@@ -29,7 +29,7 @@ import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.Apple
 import com.smbvt.bst.applewatchhomeuiandroid.ui.composables.apple_watch_ui.MenuItem
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF131518
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF181B1F
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF505050
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.GrayFF0F0F0F
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.ItemSize80
 import com.smbvt.bst.applewatchhomeuiandroid.utils.Utils
 
@@ -91,7 +91,7 @@ fun AppleWatchScreen(
             val circleRadius = size.minDimension / 2
 
             // draw a circle border
-            drawCircle(color = GrayFF505050, radius = circleRadius, style = Stroke(width = 30f))
+            drawCircle(color = GrayFF0F0F0F, radius = circleRadius, style = Stroke(width = 30f))
 
             val circlePath = Path().apply {
                 addOval(Rect(center, circleRadius))

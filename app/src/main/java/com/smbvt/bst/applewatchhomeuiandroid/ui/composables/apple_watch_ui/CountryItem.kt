@@ -19,8 +19,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -36,16 +34,18 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.smbvt.bst.applewatchhomeuiandroid.R
 import com.smbvt.bst.applewatchhomeuiandroid.domain.Country
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Black212121
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.BlackAlpha40
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Blue5F3EDB
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.ColorAlpha305F3EDB
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Elevation8
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AlphaBlack10000000
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AlphaBlack20000000
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AlphaBlack70000000
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.BorderWidth3
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.FontSize32
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding24
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding2
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding7
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding9
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Purple4D29D7
-import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Width1
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.VeryLightGray
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.White
+import com.smbvt.bst.applewatchhomeuiandroid.utils.innerShadow
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -57,43 +57,35 @@ fun CountryItem(
 ) {
 
     val shape = CircleShape
-
+    val background = if (isCenter) White else VeryLightGray
     Box(
         modifier = modifier
             .then(
                 if (isCenter) {
                     Modifier
-                        .border(
-                            brush = Brush.verticalGradient(
-                                listOf(
-                                    ColorAlpha305F3EDB, Color.Transparent
-                                )
-                            ), width = Width1, shape = CircleShape
-                        )
+                        .padding(Padding2)
+                        .border(width = BorderWidth3, color = AlphaBlack10000000, shape = shape)
                         .padding(Padding7)
-                        .shadow(
-                            elevation = Padding24,
-                            shape = shape,
-                            ambientColor = Black212121,
-                            spotColor = Black212121
-                        )
-                        .border(
-                            brush = Brush.verticalGradient(listOf(Blue5F3EDB, Color.Transparent)),
-                            width = Width1,
-                            shape = CircleShape
-                        )
                 } else {
                     Modifier
-                        .padding(Padding7)
-                        .shadow(
-                            elevation = Elevation8,
-                            shape = shape,
-                            ambientColor = BlackAlpha40,
-                            spotColor = BlackAlpha40
-                        )
+                        .padding(Padding9)
                 }
             )
-            .background(color = Color.White, shape = shape)
+            // Bottom right corner shadow.
+            .innerShadow(
+                shape = CircleShape,
+                color = AlphaBlack20000000,
+                offsetY = (-2).dp,
+                offsetX = (-2).dp
+            )
+            // Top left corner shadow.
+            .innerShadow(
+                shape = CircleShape,
+                color = AlphaBlack70000000,
+                offsetY = 2.dp,
+                offsetX = 2.dp
+            )
+            .background(color = background, shape = shape)
             .clickable {
                 onClick()
             }, contentAlignment = Alignment.Center
@@ -101,29 +93,31 @@ fun CountryItem(
         Box(
             Modifier
                 .clip(shape)
-                .fillMaxSize(), contentAlignment = Alignment.Center
+                .fillMaxSize()
+                .background(color = background),
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 modifier = Modifier.wrapContentSize(),
                 textAlign = TextAlign.Center,
-                text =  data.name.firstOrNull()?.toString() ?: stringResource(id = R.string.no_name),
+                text = data.name.firstOrNull()?.toString() ?: stringResource(id = R.string.no_name),
                 style = TextStyle(
                     color = Purple4D29D7, fontSize = FontSize32
                 ),
                 fontWeight = FontWeight.Bold
             )
 
-            var background by remember {
+            var backgroundState by remember {
                 mutableStateOf(Color.Transparent)
             }
 
             GlideImage(
                 model = data.icon,
                 contentDescription = "",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.Inside,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = background)
+                    .background(color = backgroundState)
                     .clickable(onClick = onClick),
             ) {
                 // identify once loading is completed and set white background color for the image view to hide name first letter text
@@ -145,7 +139,7 @@ fun CountryItem(
                         dataSource: DataSource,
                         isFirstResource: Boolean
                     ): Boolean {
-                        background = Color.White
+                        backgroundState = background
                         return false
                     }
 

@@ -11,14 +11,13 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 
-val ColorAlpha305F3EDB = Color(0x205F3EDB)
-val Black212121 = Color(0xFF212121)
-val Blue5F3EDB = Color(0xFF5F3EDB)
-val BlackAlpha40 = Color(0x70000000)
 val Purple4D29D7 = Color(0xff4D29D7)
 val White = Color(0xffffffff)
+val VeryLightGray = Color(0xFFFAFAFA)
 
-val AlphaWhite6BFFFFFF = Color(0x6BFFFFFF)
+val AlphaBlack10000000 = Color(0x10000000)
+val AlphaBlack20000000 = Color(0x20000000)
+val AlphaBlack70000000 = Color(0x70000000)
 
 val Yellow = Color(0xFFFFFF00)
 val Red = Color(0xFFFF0000)
@@ -31,6 +30,6 @@ val Steel3 = Color(0xFF777684)
 val Steel4 = Color(0xFFCCCCD4)
 val GrayFF181B1F = Color(0xFF181B1F)
 val GrayFF131518 = Color(0xFF131518)
-val GrayFF505050 = Color(0xFF0F0F0F)
+val GrayFF0F0F0F = Color(0xFF0F0F0F)
 
 
