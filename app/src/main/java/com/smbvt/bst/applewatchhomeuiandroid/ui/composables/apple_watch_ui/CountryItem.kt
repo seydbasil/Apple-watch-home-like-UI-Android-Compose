@@ -60,6 +60,7 @@ fun CountryItem(
     val background = if (isCenter) White else VeryLightGray
     Box(
         modifier = modifier
+            .fillMaxSize() // fillMaxSize is must here, otherwise, on click center item, it wouldn't focus to the item. Because item will resize if fillMaxSize not used, so the grid will redraw
             .then(
                 if (isCenter) {
                     Modifier
