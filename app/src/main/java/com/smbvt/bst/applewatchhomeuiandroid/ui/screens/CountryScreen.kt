@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -31,6 +33,7 @@ import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.AlphaBlack20000000
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Height60
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.ItemSize100
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Padding7
+import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.Size70
 import com.smbvt.bst.applewatchhomeuiandroid.ui.theme.White
 import com.smbvt.bst.applewatchhomeuiandroid.utils.Utils
 
@@ -95,7 +98,7 @@ fun CountryScreen(
                             )
                         )
                 )
-
+                Spacer(modifier = Modifier.size(Size70))
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
