@@ -9,5 +9,6 @@ val Padding9 = 9.dp
 val ItemSize100 = 100.dp
 val ItemSize80 = 80.dp
 val Size24 = 24.dp
+val Height60 = 60.dp
 val BorderWidth3 = 3.dp
 
